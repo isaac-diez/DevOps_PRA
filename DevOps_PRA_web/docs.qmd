@@ -1,5 +1,0 @@
----
-title: "Docs"
----
-
-Docs in this site
