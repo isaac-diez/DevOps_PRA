@@ -9,8 +9,7 @@ website:
         text: Home
       - href: about.qmd
         text: About
-      - href: docs.qmd
-        text: Docs
+      - text: Docs
         menu:
           - text: "DevOps Apps Plex"
             href: devops-apps-plex.qmd
@@ -20,6 +19,7 @@ website:
             href: devops-apps-transmission.qmd
       - href: links.qmd
         text: Links
+
     background: secondary
     style: "floating"
     search: true
@@ -50,6 +50,5 @@ highlight-style: monokai
 
 editor:
   render-on-save: true
-
-page-navigation: true
-back-to-top-navigation: true
+  page-navigation: true
+  back-to-top-navigation: true
