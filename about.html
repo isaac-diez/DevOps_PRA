@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>isaac first quarto - Setting up and using GitActions</title>
+<title>isaac first quarto - About</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -95,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link active" href="./about.html" aria-current="page"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -138,7 +138,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#setting-up-and-using-gitactions" id="toc-setting-up-and-using-gitactions" class="nav-link active" data-scroll-target="#setting-up-and-using-gitactions">Setting up and using GitActions</a></li>
+  <li><a href="#header-1" id="toc-header-1" class="nav-link active" data-scroll-target="#header-1">Header 1</a>
+  <ul class="collapse">
+  <li><a href="#header-2" id="toc-header-2" class="nav-link" data-scroll-target="#header-2">Header 2</a>
+  <ul class="collapse">
+  <li><a href="#header-3" id="toc-header-3" class="nav-link" data-scroll-target="#header-3">Header 3</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -147,7 +153,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Setting up and using GitActions</h1>
+<h1 class="title">About</h1>
 </div>
 
 
@@ -164,27 +170,25 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="setting-up-and-using-gitactions" class="level1">
-<h1>Setting up and using GitActions</h1>
-<p>Publish Action</p>
-<p>Before configuring the publishing action, it’s important that you run quarto publish gh-pages locally, once. This will create the _publish.yml configuration required by the subsequent invocations of the GitHub Action. To do this, run the following from within your project:</p>
-<p>quarto publish gh-pages</p>
-<p>Once you’ve completed a local publish, add a publish.yml GitHub Action to your project by creating this YAML file and saving it to .github/workflows/publish.yml:</p>
-<p>.github/workflows/publish.yml</p>
-<p>on: workflow_dispatch: push: branches: main</p>
-<p>name: Quarto Publish</p>
-<p>jobs: build-deploy: runs-on: ubuntu-latest permissions: contents: write steps: - name: Check out repository uses: actions/checkout@v4</p>
-<pre><code>  - name: Set up Quarto
-    uses: quarto-dev/quarto-actions/setup@v2
-
-  - name: Render and Publish
-    uses: quarto-dev/quarto-actions/publish@v2
-    with:
-      target: gh-pages
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}</code></pre>
+<p>About this site</p>
+<p>Diferent styles</p>
+<section id="header-1" class="level1">
+<h1>Header 1</h1>
+<section id="header-2" class="level2">
+<h2 class="anchored" data-anchor-id="header-2">Header 2</h2>
+<section id="header-3" class="level3">
+<h3 class="anchored" data-anchor-id="header-3">Header 3</h3>
+<section id="header-4" class="level4">
+<h4 class="anchored" data-anchor-id="header-4">Header 4</h4>
+<p><em>italics</em>, <strong>bold</strong>, <strong><em>bold italics</em></strong></p>
+<p>superscript<sup>2</sup> / subscript<sub>2</sub></p>
+<p><del>strikethrough</del></p>
+<p><code>verbatim code</code></p>
 
 
+</section>
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
