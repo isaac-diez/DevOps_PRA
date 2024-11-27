@@ -104,10 +104,25 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./docs.html"> 
-<span class="menu-text">Docs</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-docs" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Docs</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-docs">    
+        <li>
+    <a class="dropdown-item" href="./devops-apps-plex.html">
+ <span class="dropdown-text">DevOps Apps Plex</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./devops-apps-shared-network-drive.html">
+ <span class="dropdown-text">Shared Network Drive</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./devops-apps-transmission.html">
+ <span class="dropdown-text">Transmission</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./links.html"> 
 <span class="menu-text">Links</span></a>
@@ -300,7 +315,7 @@ Expand To Learn About Collapse
 <h3 class="anchored" data-anchor-id="standard-image">Standard Image</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://quarto.org/docs/authoring/elephant.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="An elephant"><img src="https://quarto.org/docs/authoring/elephant.png" class="img-fluid figure-img" alt="An elephant"></a></p>
+<p><a href="https://quarto.org/docs/authoring/elephant.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="An elephant"><img src="https://quarto.org/docs/authoring/elephant.png" class="img-fluid figure-img" alt="An elephant"></a></p>
 <figcaption>An elephant</figcaption>
 </figure>
 </div>
@@ -914,7 +929,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":false});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
