@@ -121,6 +121,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="./devops-apps-transmission.html">
  <span class="dropdown-text">Transmission</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./devops-git-actions.html">
+ <span class="dropdown-text">Git Actions</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -315,7 +319,7 @@ Expand To Learn About Collapse
 <h3 class="anchored" data-anchor-id="standard-image">Standard Image</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://quarto.org/docs/authoring/elephant.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="An elephant"><img src="https://quarto.org/docs/authoring/elephant.png" class="img-fluid figure-img" alt="An elephant"></a></p>
+<p><a href="https://quarto.org/docs/authoring/elephant.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="An elephant"><img src="https://quarto.org/docs/authoring/elephant.png" class="img-fluid figure-img" alt="An elephant"></a></p>
 <figcaption>An elephant</figcaption>
 </figure>
 </div>
@@ -574,7 +578,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/isaac-diez\.github\.io\/DevOps_PRA\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -929,7 +933,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":false});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
