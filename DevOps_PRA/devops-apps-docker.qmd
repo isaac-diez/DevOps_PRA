@@ -51,3 +51,13 @@ To see all running containers:
 ```
 docker ps
 ```
+
+To upload images to Docker Hub:
+```
+docker tag 2540105a414f isaacdiez/frontend-pra04:latest
+docker tag 7adcb4eec586 isaacdiez/books:latest
+docker push isaacdiez/frontend-pra04:latest
+docker push isaacdiez/books:latest
+```
+
+

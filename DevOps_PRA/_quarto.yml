@@ -18,7 +18,9 @@ website:
           - text: "Transmission"
             href: devops-apps-transmission.qmd
           - text: "Git Actions"
-            href: devops-git-actions.qmd            
+            href: devops-git-actions.qmd
+          - text: "Docker"
+            href: devops-apps-docker.qmd            
       - href: links.qmd
         text: Links
 
