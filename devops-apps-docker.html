@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Setting up and using GitActions – isaac first quarto</title>
+<title>Docker – isaac first quarto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -141,21 +141,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#setting-up-and-using-gitactions" id="toc-setting-up-and-using-gitactions" class="nav-link active" data-scroll-target="#setting-up-and-using-gitactions">Setting up and using GitActions</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Setting up and using GitActions</h1>
+<h1 class="title">Docker</h1>
 </div>
 
 
@@ -172,28 +166,48 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="setting-up-and-using-gitactions" class="level1">
-<h1>Setting up and using GitActions</h1>
-<p>Publish Action</p>
-<p>Before configuring the publishing action, it’s important that you run quarto publish gh-pages locally, once. This will create the _publish.yml configuration required by the subsequent invocations of the GitHub Action. To do this, run the following from within your project:</p>
-<p>quarto publish gh-pages</p>
-<p>Once you’ve completed a local publish, add a publish.yml GitHub Action to your project by creating this YAML file and saving it to .github/workflows/publish.yml:</p>
-<p>.github/workflows/publish.yml</p>
-<p>on: workflow_dispatch: push: branches: main</p>
-<p>name: Quarto Publish</p>
-<p>jobs: build-deploy: runs-on: ubuntu-latest permissions: contents: write steps: - name: Check out repository uses: actions/checkout@v4</p>
-<pre><code>  - name: Set up Quarto
-    uses: quarto-dev/quarto-actions/setup@v2
+<ol type="1">
+<li>Create folders booksBackEnd and booksFrontEnd in root of git repo folder.</li>
+<li>In booksBackEnd we put .jar and create app.Dockerfile</li>
+<li>Contents of app.Dockerfile:</li>
+</ol>
+<pre><code># Use a Java 21 base image
+FROM openjdk:21-jdk-slim
 
-  - name: Render and Publish
-    uses: quarto-dev/quarto-actions/publish@v2
-    with:
-      target: gh-pages
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}</code></pre>
+# Maintainer information
+LABEL maintainer="isaacdiez"
+
+# Copy the application JAR file to the container
+COPY BooksPageable-0.0.4-SNAPSHOT.jar books.jar
+
+# Set the entry point to run the JAR file
+ENTRYPOINT ["java", "-jar", "books.jar"]</code></pre>
+<ol start="4" type="1">
+<li><p>In folder booksFrontEnd we create yet another folder named frontend where we put all the uncompressed contents of the react project.</p></li>
+<li><p>We create frontend.Dockerfile:</p></li>
+</ol>
+<pre><code>FROM nginx:alpine
+COPY frontend/ /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]</code></pre>
+<ol start="6" type="1">
+<li>In CLI:</li>
+</ol>
+<pre><code>sudo docker build -f app.dockerfile -t books .
+sudo docker run -p 8080:8080 books</code></pre>
+<pre><code>sudo docker build -t frontend-pra04 -f frontend.Dockerfile .
+sudo docker run -d -p 90:80 frontend-pra04</code></pre>
+<p>To see all the images created:</p>
+<pre><code>docker image ls</code></pre>
+<p>To see all running containers:</p>
+<pre><code>docker ps</code></pre>
+<p>To upload images to Docker Hub:</p>
+<pre><code>docker tag 2540105a414f isaacdiez/frontend-pra04:latest
+docker tag 7adcb4eec586 isaacdiez/books:latest
+docker push isaacdiez/frontend-pra04:latest
+docker push isaacdiez/books:latest</code></pre>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
