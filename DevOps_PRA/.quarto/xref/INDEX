@@ -22,5 +22,8 @@
   },
   "devops-git-actions.qmd": {
     "devops-git-actions.html": "7d136e17"
+  },
+  "devops-apps-docker.qmd": {
+    "devops-apps-docker.html": "a97307ac"
   }
 }
