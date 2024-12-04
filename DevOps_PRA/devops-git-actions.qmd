@@ -2,8 +2,6 @@
 title: "Setting up and using GitActions"
 ---
 
-# Setting up and using GitActions
-
 Publish Action
 
 Before configuring the publishing action, it’s important that you run quarto publish gh-pages locally, once. This will create the _publish.yml configuration required by the subsequent invocations of the GitHub Action. To do this, run the following from within your project:
@@ -14,13 +12,15 @@ Once you’ve completed a local publish, add a publish.yml GitHub Action to your
 
 .github/workflows/publish.yml
 
+```
 on:
   workflow_dispatch:
   push:
     branches: main
-
+```
 name: Quarto Publish
 
+```
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
@@ -39,3 +39,4 @@ jobs:
           target: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```

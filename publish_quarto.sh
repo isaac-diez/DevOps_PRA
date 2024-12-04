@@ -40,10 +40,10 @@ else
 fi
 
 # Push the changes to the main branch
-if git push origin branchPR03; then
-  log_message "Pushed changes to branchPR03."
+if git push origin branchPR04; then
+  log_message "Pushed changes to branchPR04."
 else
-  log_message "Push to branchPR03 failed."
+  log_message "Push to branchPR04 failed."
   exit 1
 fi
 

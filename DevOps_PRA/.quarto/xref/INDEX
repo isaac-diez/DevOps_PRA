@@ -25,5 +25,8 @@
   },
   "devops-apps-docker.qmd": {
     "devops-apps-docker.html": "a97307ac"
+  },
+  "devops-apps-jenkins.qmd": {
+    "devops-apps-jenkins.html": "e7a657c0"
   }
 }
