@@ -20,7 +20,9 @@ website:
           - text: "Git Actions"
             href: devops-git-actions.qmd
           - text: "Docker"
-            href: devops-apps-docker.qmd            
+            href: devops-apps-docker.qmd
+          - text: "Jenkins"
+            href: devops-apps-jenkins.qmd            
       - href: links.qmd
         text: Links
 
