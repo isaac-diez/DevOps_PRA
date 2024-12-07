@@ -174,14 +174,37 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Para descargar, crear y lanzar un contenedor con Jenkins:</p>
-<pre><code>docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --name jenkins jenkins/jenkins:lts</code></pre>
+<pre><code>docker run -d \
+ --name jenkins \
+ -p 8080:8080 \
+ -p 50000:50000 \
+ -v jenkins_home:/var/jenkins_home \
+ -v /var/run/docker.sock:/var/run/docker.sock \
+ --privileged \
+ jenkins/jenkins:lts
+</code></pre>
+<blockquote class="blockquote">
+<p><strong>IMPORTANTE:</strong> Para que Jenkins pueda acceder a Docker, este tiene que estar instalado dentro del contenedor mismo de Jenkins.</p>
+</blockquote>
+<p>Acceder a la consola de Jenkins en su:</p>
+<pre><code>docker exec -u root -it jenkins2 bash</code></pre>
+<p>Instalar Docker:</p>
+<pre><code>curl https://get.docker.com/ &gt; dockerinstall &amp;&amp; chmod 777 dockerinstall &amp;&amp; ./dockerinstall</code></pre>
+<p>Dentro de Jenkins todavía, añadimos el usuario Jenkins al grupo Docker:</p>
+<pre><code>usermod -aG docker jenkins</code></pre>
+<p>Cambiar provilegios de docker.sock:</p>
+<pre><code>chmod 666 /var/run/docker.sock</code></pre>
+<p>Se tiene que reiniciar el contenedor de Jenkins</p>
+<p><strong>COMANDOS ÚTILES:</strong></p>
+<p>Ver todos los contenedores:</p>
+<pre><code>docker -ps a</code></pre>
 <p>Eliminar todas las imagenes y contenedores:</p>
 <pre><code>docker rm $(docker ps -aq) &amp;&amp; docker rmi $(docker images -q)</code></pre>
 <p>Hay que tener instalado Docker Pipeline.</p>
 <p>El Repositorio de GitHub tiene que contener el proyecto completo, no únicamente un .jar además del Dockerfile y del pom.xml de Spring.</p>
 <p>Para los JDK de Java:</p>
 <p><a href="resources/images/Jenkins_JDK_Screenshot_2024-12-04_21-25-34.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="JDK11"><img src="resources/images/Jenkins_JDK_Screenshot_2024-12-04_21-25-34.png" class="img-fluid" alt="JDK11"></a> <a href="resources/images/Jenkins_JDK_Screenshot_2024-12-04_21-26-15.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="JDK21"><img src="resources/images/Jenkins_JDK_Screenshot_2024-12-04_21-26-15.png" class="img-fluid" alt="JDK21"></a></p>
-<p>Generamos una nueva pipeline en Jenkins y metemos el código:</p>
+<p>Generamos una nueva pipeline en Jenkins y metemos el código. Atención con los puertos, que no coincidan con los de Jenkins:</p>
 <pre><code>pipeline {
     agent any
 
@@ -214,7 +237,7 @@ ul.task-list li input[type="checkbox"] {
         stage('Docker Run') {
             steps {
                 script {
-                    docker.image("pageablebooks:${env.BUILD_ID}").run('-p 8080:8080')
+                    docker.image("pageablebooks:${env.BUILD_ID}").run('-p 8088:8088')
                 }
             }
         }
