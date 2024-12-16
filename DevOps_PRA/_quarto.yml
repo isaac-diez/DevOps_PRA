@@ -23,6 +23,11 @@ website:
             href: devops-apps-docker.qmd
           - text: "Jenkins"
             href: devops-apps-jenkins.qmd            
+      - href: mooc.qmd
+        text: MOOC
+        menu:
+          - text: "Streams"
+            href: mooc-streams.qmd  
       - href: links.qmd
         text: Links
 
@@ -47,6 +52,8 @@ format:
       dark: darkly
     css: styles.css
     toc: true
+    code-fold: true
+    copy-code: true
 
 execute:
   cache: true

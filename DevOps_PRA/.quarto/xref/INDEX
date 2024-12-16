@@ -28,5 +28,11 @@
   },
   "devops-apps-jenkins.qmd": {
     "devops-apps-jenkins.html": "e7a657c0"
+  },
+  "streams.qmd": {
+    "streams.html": "2630dc3c"
+  },
+  "mooc.qmd": {
+    "mooc.html": "c01b07bf"
   }
 }
