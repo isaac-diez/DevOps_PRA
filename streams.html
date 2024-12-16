@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Setting up and using GitActions – isaac first quarto</title>
+<title>Streams – isaac first quarto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -157,7 +157,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Setting up and using GitActions</h1>
+<h1 class="title">Streams</h1>
 </div>
 
 
@@ -174,34 +174,30 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Publish Action</p>
-<p>Before configuring the publishing action, it’s important that you run quarto publish gh-pages locally, once. This will create the _publish.yml configuration required by the subsequent invocations of the GitHub Action. To do this, run the following from within your project:</p>
-<p>quarto publish gh-pages</p>
-<p>Once you’ve completed a local publish, add a publish.yml GitHub Action to your project by creating this YAML file and saving it to .github/workflows/publish.yml:</p>
-<p>.github/workflows/publish.yml</p>
-<pre><code>on:
-  workflow_dispatch:
-  push:
-    branches: main</code></pre>
-<p>name: Quarto Publish</p>
-<pre><code>jobs:
-  build-deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-
-      - name: Render and Publish
-        uses: quarto-dev/quarto-actions/publish@v2
-        with:
-          target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}</code></pre>
+<p><strong>Divisible by 3</strong></p>
+<pre><code>long numbersDivisibleByThree = inputs.stream()
+    .mapToInt(s -&gt; Integer.valueOf(s))
+    .filter(number -&gt; number % 3 == 0)
+    .count();</code></pre>
+<p><strong>Divisible by 3</strong></p>
+<pre><code>long numbersDivisibleByThree = inputs.stream()
+    .mapToInt(s -&gt; Integer.valueOf(s))
+    .filter(number -&gt; number % 3 == 0)
+    .count();</code></pre>
+<p><strong>Average</strong></p>
+<pre><code>double average = inputs.stream()
+    .mapToInt(s -&gt; Integer.valueOf(s))
+    .average()
+    .getAsDouble();</code></pre>
+<p><strong>Filter and create another list with filtered values</strong></p>
+<pre><code>ArrayList&lt;Integer&gt; values = list.stream()
+    .filter(value -&gt; value &gt; 5)
+    .map(value -&gt; value * 2)
+    .collect(Collectors.toCollection(ArrayList::new));</code></pre>
+<p><strong>Print all values in collections</strong></p>
+<pre><code>values.stream()
+    .filter(value -&gt; value % 2 == 0)
+    .forEach(value -&gt; System.out.println(value));</code></pre>
 
 
 
