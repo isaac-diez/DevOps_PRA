@@ -198,6 +198,48 @@ ul.task-list li input[type="checkbox"] {
 <pre><code>values.stream()
     .filter(value -&gt; value % 2 == 0)
     .forEach(value -&gt; System.out.println(value));</code></pre>
+<p><strong>Filter by lastName in Alphabetical order</strong></p>
+<pre><code>        persons.stream()
+                .map(person -&gt; person.getLastName())
+                .distinct()
+                .sorted()
+                .forEach(name -&gt; System.out.println(name));</code></pre>
+<p><strong>Convert while loop for printing all elements into stream()</strong></p>
+<pre><code>    public void printItems() {
+//        int indeksi = 0;
+//        while (indeksi &lt; this.suitcases.size()) {
+//        this.suitcases.get(indeksi).printItems();
+//        indeksi++;
+//        }
+        
+        this.suitcases.stream()
+                .forEach(suitcase -&gt; suitcase.printItems());
+    }</code></pre>
+<p><strong>Convert while loop to add all the weights of all elements in a list to a stream()</strong> ``` public int totalWeight() { int summa = 0; int indeksi = 0;</p>
+<p>// while (indeksi &lt; this.suitcases.size()) { // summa += this.suitcases.get(indeksi).totalWeight(); // indeksi++; // } return this.suitcases.stream() .mapToInt(Suitcase::totalWeight) .sum(); }</p>
+<pre><code>**Programm that creates objects with data from file and prints them**</code></pre>
+<p>public class BooksFromFile {</p>
+<pre><code>public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    // test your method here
+
+    readBooks("books.txt").stream()
+            .forEach(System.out::println);
+}
+
+public static List&lt;Book&gt; readBooks(String file) {
+    List&lt;Book&gt; books = new ArrayList&lt;&gt;();
+    try {
+        Files.lines(Paths.get(file))
+                .map(row -&gt; row.split(","))
+                .map(parts -&gt; new Book(parts[0], Integer.valueOf(parts[1]), Integer.valueOf(parts[2]), parts[3]))
+                .forEach(books::add);
+    } catch (IOException e) {
+        System.out.println("Error: " + e.getMessage());
+    }
+    return books;
+}</code></pre>
+<p>} ```</p>
 
 
 
