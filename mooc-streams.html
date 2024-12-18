@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Docker – isaac first quarto</title>
+<title>Streams – isaac first quarto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -164,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Docker</h1>
+<h1 class="title">Streams</h1>
 </div>
 
 
@@ -181,46 +181,72 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<ol type="1">
-<li>Create folders booksBackEnd and booksFrontEnd in root of git repo folder.</li>
-<li>In booksBackEnd we put .jar and create app.Dockerfile</li>
-<li>Contents of app.Dockerfile:</li>
-</ol>
-<pre><code># Use a Java 21 base image
-FROM openjdk:21-jdk-slim
+<p><strong>Divisible by 3</strong></p>
+<pre><code>long numbersDivisibleByThree = inputs.stream()
+    .mapToInt(s -&gt; Integer.valueOf(s))
+    .filter(number -&gt; number % 3 == 0)
+    .count();</code></pre>
+<p><strong>Divisible by 3</strong></p>
+<pre><code>long numbersDivisibleByThree = inputs.stream()
+    .mapToInt(s -&gt; Integer.valueOf(s))
+    .filter(number -&gt; number % 3 == 0)
+    .count();</code></pre>
+<p><strong>Average</strong></p>
+<pre><code>double average = inputs.stream()
+    .mapToInt(s -&gt; Integer.valueOf(s))
+    .average()
+    .getAsDouble();</code></pre>
+<p><strong>Filter and create another list with filtered values</strong></p>
+<pre><code>ArrayList&lt;Integer&gt; values = list.stream()
+    .filter(value -&gt; value &gt; 5)
+    .map(value -&gt; value * 2)
+    .collect(Collectors.toCollection(ArrayList::new));</code></pre>
+<p><strong>Print all values in collections</strong></p>
+<pre><code>values.stream()
+    .filter(value -&gt; value % 2 == 0)
+    .forEach(value -&gt; System.out.println(value));</code></pre>
+<p><strong>Filter by lastName in Alphabetical order</strong></p>
+<pre><code>        persons.stream()
+                .map(person -&gt; person.getLastName())
+                .distinct()
+                .sorted()
+                .forEach(name -&gt; System.out.println(name));</code></pre>
+<p><strong>Convert while loop for printing all elements into stream()</strong></p>
+<pre><code>    public void printItems() {
+//        int indeksi = 0;
+//        while (indeksi &lt; this.suitcases.size()) {
+//        this.suitcases.get(indeksi).printItems();
+//        indeksi++;
+//        }
+        
+        this.suitcases.stream()
+                .forEach(suitcase -&gt; suitcase.printItems());
+    }</code></pre>
+<p><strong>Convert while loop to add all the weights of all elements in a list to a stream()</strong> ``` public int totalWeight() { int summa = 0; int indeksi = 0;</p>
+<p>// while (indeksi &lt; this.suitcases.size()) { // summa += this.suitcases.get(indeksi).totalWeight(); // indeksi++; // } return this.suitcases.stream() .mapToInt(Suitcase::totalWeight) .sum(); }</p>
+<pre><code>**Programm that creates objects with data from file and prints them**</code></pre>
+<p>public class BooksFromFile {</p>
+<pre><code>public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    // test your method here
 
-# Maintainer information
-LABEL maintainer="isaacdiez"
+    readBooks("books.txt").stream()
+            .forEach(System.out::println);
+}
 
-# Copy the application JAR file to the container
-COPY BooksPageable-0.0.4-SNAPSHOT.jar books.jar
-
-# Set the entry point to run the JAR file
-ENTRYPOINT ["java", "-jar", "books.jar"]</code></pre>
-<ol start="4" type="1">
-<li><p>In folder booksFrontEnd we create yet another folder named frontend where we put all the uncompressed contents of the react project.</p></li>
-<li><p>We create frontend.Dockerfile:</p></li>
-</ol>
-<pre><code>FROM nginx:alpine
-COPY frontend/ /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]</code></pre>
-<ol start="6" type="1">
-<li>In CLI:</li>
-</ol>
-<pre><code>sudo docker build -f app.dockerfile -t books .
-sudo docker run -p 8080:8080 books</code></pre>
-<pre><code>sudo docker build -t frontend-pra04 -f frontend.Dockerfile .
-sudo docker run -d -p 90:80 frontend-pra04</code></pre>
-<p>To see all the images created:</p>
-<pre><code>docker image ls</code></pre>
-<p>To see all running containers:</p>
-<pre><code>docker ps</code></pre>
-<p>To upload images to Docker Hub:</p>
-<pre><code>docker tag 2540105a414f isaacdiez/frontend-pra04:latest
-docker tag 7adcb4eec586 isaacdiez/books:latest
-docker push isaacdiez/frontend-pra04:latest
-docker push isaacdiez/books:latest</code></pre>
+public static List&lt;Book&gt; readBooks(String file) {
+    List&lt;Book&gt; books = new ArrayList&lt;&gt;();
+    try {
+        Files.lines(Paths.get(file))
+                .map(row -&gt; row.split(","))
+                .map(parts -&gt; new Book(parts[0], Integer.valueOf(parts[1]), Integer.valueOf(parts[2]), parts[3]))
+                .forEach(books::add);
+    } catch (IOException e) {
+        System.out.println("Error: " + e.getMessage());
+    }
+    return books;
+}</code></pre>
+<p>} ```</p>
 
 
 
