@@ -246,7 +246,15 @@ public static List&lt;Book&gt; readBooks(String file) {
     }
     return books;
 }</code></pre>
-<p>} ```</p>
+<p>} ``` <strong>Program that reads data from file, sorts it (alphabetically, by size, etc.) and prints it</strong> ´´´ try { Files.lines(Paths.get(“literacy.csv”)) .map(x -&gt; x.split(“,”)) .sorted((x, y) -&gt; x[5].compareTo(y[5])) .forEach(row -&gt; System.out.println(row[3] + ” (” + row[4] + “),” + row[2].split(” “)[1].trim() +”, ” + row[5])); } catch (IOException e) { System.out.println(“Error:” + e.getMessage()); } ´´´</p>
+<p><strong>Sorting By Multiple Criteria</strong> We’ll use Java’s Comparator class with methods comparing and theComparing. Example <a href="https://github.com/isaac-diez/java_mooc_2/blob/master/part10-Part10_14.Literature/src/main/java/MainProgram.java" class="uri">https://github.com/isaac-diez/java_mooc_2/blob/master/part10-Part10_14.Literature/src/main/java/MainProgram.java</a></p>
+<p>´´´ Comparator<book> comparator = Comparator .comparing(Book::getBookAgeRecommendation) .thenComparing(Book::getBookName);</book></p>
+<pre><code>    Collections.sort(books, comparator);
+
+    for (Book b : books) {
+        System.out.println(b);
+    }</code></pre>
+<p>´´´</p>
 
 
 
